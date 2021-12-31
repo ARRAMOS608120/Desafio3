@@ -1,5 +1,5 @@
 import express from 'express'
-//import exphbs from 'express-handlebars'
+import exphbs from 'express-handlebars'
 
 const app = express()
 
@@ -17,11 +17,18 @@ app.use(express.urlencoded({ extended: true }))
 
 import MongoStore from'connect-mongo'
 const advancedOptions = { useNewUrlParser: true, useUnifiedTopology: true }
-//import { routerCarrito, routerProductos } from './rutas.js'
+import { routerCarrito, routerProductos, routerHome } from './rutas.js'
 
 import passport from 'passport'
 import { Strategy as LocalStrategy} from 'passport-local'
 
+
+app.engine('hbs', exphbs({
+  extname: ".hbs",
+  defaultLayout: "index.hbs",
+  //layoutsDir: __dirname + "/views/layouts",
+  partialsDir: __dirname + "/views/partials"
+}))
 app.use(session({
   store: MongoStore.create({ mongoUrl:'mongodb+srv://ariel:Coder2021@cluster0.wjzen.mongodb.net/ecommerce?retryWrites=true&w=majority',
   mongoOptions: advancedOptions, ttl: 100
@@ -129,7 +136,7 @@ passport.use('login', new LocalStrategy(async (username, password, done) => {
   if (!user) {
     return done(null, false)
   }
-  if (user.password != createHash(password)) {
+  if (bCrypt.compareSync(user.password, password)){
     return done(null, false)
   }
 
@@ -208,18 +215,19 @@ app.get('/logout', (req, res) => {
   })
   
   /* --------- INICIO ---------- */
-app.get('/', isAuth, (req, res) => {
- res.render(path.join(process.cwd(), '/views/index.hbs'), {email: req.user.username} )
-   console.log(req.user.username)
- })
+app.use('/',isAuth,routerHome)
+/*app.get('/', isAuth, (req, res) => {
+ res.render(path.join(process.cwd(), '/views/index.hbs'), {email: req.user.username, direccion: req.user.direccion,nombre: req.user.nombre,edad: req.user.edad,numero: req.user.numero,foto: req.user.foto})
+ })*/
 
-//app.use('/api/carrito',routerCarrito)
-//app.use('/api/productos',routerProductos)
-/*app.use(function (req, res, next) {
+app.use('/api/carrito',routerCarrito)
+app.use('/api/productos',routerProductos)
+
+app.use(function (req, res, next) {
     const rutaincorrecta= {error:-2, descripcion: `Ruta ${req.url} metodo ${req.method} no implementada`}
     res.send(rutaincorrecta)
     next();
-  });*/
+  });
 
 
 /* Server Listen */

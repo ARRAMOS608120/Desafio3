@@ -88,4 +88,34 @@ routerCarrito.delete('/:id/productos/:id_prod', async(req, res) => {
     res.json(borrado)
 })
 
-export { routerCarrito, routerProductos} 
+/* ------------------------------------------------------ */
+/* Productos home*/
+
+const routerHome = new Router()
+routerHome.use(express.json())
+routerHome.use(express.urlencoded({ extended: true }))
+
+routerHome.get('/', async (req, res) => {
+    const carritos = await carritosDao.getAll()
+    console.log(carritos)
+    const resultado = carritos.find( carrito => carrito.username === ' req.user.username' );
+    console.log(resultado)
+    const products= await productosDao.getAll()
+    if (resultado==undefined){
+        const carritoNuevo = {username: req.user.username}
+        const prueba = await carritosDao.save(carritoNuevo)
+        console.log(prueba.id)
+        //const productoSel=await carritosDao.getByID(req.params.id)
+        if (products.length==0){
+            res.render('index', { listadoProd: products, listExists: false, email: req.user.username, direccion: req.user.direccion,nombre: req.user.nombre,edad: req.user.edad,numero: req.user.numero,foto: req.user.foto} )
+        } else {res.render('index', { listadoProd: products, listExists: true, email: req.user.username, direccion: req.user.direccion,nombre: req.user.nombre,edad: req.user.edad,numero: req.user.numero,foto: req.user.foto })}
+    }
+    else{
+        if (products.length==0){
+            res.render('index', { listadoProd: products, listExists: false, email: req.user.username, direccion: req.user.direccion,nombre: req.user.nombre,edad: req.user.edad,numero: req.user.numero,foto: req.user.foto} )
+        } else {res.render('index', { listadoProd: products, listExists: true, email: req.user.username, direccion: req.user.direccion,nombre: req.user.nombre,edad: req.user.edad,numero: req.user.numero,foto: req.user.foto })}
+    }
+    
+ } )
+
+export { routerCarrito, routerProductos, routerHome} 
