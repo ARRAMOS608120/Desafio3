@@ -1,0 +1,33 @@
+<h2 style="color:blue;">Vista de Productos</h2>
+
+{{#if listExists}}
+<div class="table-responsive">
+    <table class="table table-dark">
+        <tr style="color: yellow;">
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Foto</tr>
+        </tr>
+        <ul>
+        {{#each listadoProd}}
+        <tr>
+            <td>
+                {{this.nombre}}
+            </td>
+            <td>
+                  {{this.precio}}
+            </td>
+            <td>
+                <img src= {{this.foto}}>
+            </td>
+            {{/each}}
+        </ul>
+        </tr>
+    </table>
+      
+</div>
+      
+{{else}}
+<h3 class="alert alert-danger">No hay productos</h1>
+{{/if}}
+

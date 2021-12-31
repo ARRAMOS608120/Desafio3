@@ -1,0 +1,12 @@
+[
+  {
+    "nombre": "Escuadra",
+    "descripcion": "Instrumento de medicion",
+    "precio": "25",
+    "stock": "2",
+    "codigo": "A1C7",
+    "foto": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png",
+    "id": 19,
+    "timestamp": 1633075421783
+  }
+]

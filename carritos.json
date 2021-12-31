@@ -1,0 +1,18 @@
+[
+  {
+    "id": 2,
+    "timestamp": 1633051519752,
+    "productos": [
+      {
+        "nombre": "ESCUADRA",
+        "descripcion": "una escuadra",
+        "precio": "21",
+        "stock": "2",
+        "codigo": "A1C7",
+        "foto": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png",
+        "id": 12,
+        "timestamp": 1633046758594
+      }
+    ]
+  }
+]
