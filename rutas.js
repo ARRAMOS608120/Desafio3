@@ -97,25 +97,23 @@ routerHome.use(express.urlencoded({ extended: true }))
 
 routerHome.get('/', async (req, res) => {
     const carritos = await carritosDao.getAll()
-    console.log(carritos)
-    const resultado = carritos.find( carrito => carrito.username === ' req.user.username' );
-    console.log(resultado)
+    const resultado = carritos.find( carrito => carrito.username === req.user.username);
     const products= await productosDao.getAll()
     if (resultado==undefined){
         const carritoNuevo = {username: req.user.username}
         const prueba = await carritosDao.save(carritoNuevo)
-        console.log(prueba.id)
-        //const productoSel=await carritosDao.getByID(req.params.id)
+        const productoSel =await carritosDao.getByID(prueba.id)
+        const carritofinal= JSON.stringify (productoSel.productos)
         if (products.length==0){
-            res.render('index', { listadoProd: products, listExists: false, email: req.user.username, direccion: req.user.direccion,nombre: req.user.nombre,edad: req.user.edad,numero: req.user.numero,foto: req.user.foto} )
-        } else {res.render('index', { listadoProd: products, listExists: true, email: req.user.username, direccion: req.user.direccion,nombre: req.user.nombre,edad: req.user.edad,numero: req.user.numero,foto: req.user.foto })}
+            res.render('index', { listadoProd: products, listExists: false, email: req.user.username, direccion: req.user.direccion,nombre: req.user.nombre,edad: req.user.edad,numero: req.user.numero,foto: req.user.foto, carrito:  carritofinal} )
+        } else {res.render('index', { listadoProd: products, listExists: true, email: req.user.username, direccion: req.user.direccion,nombre: req.user.nombre,edad: req.user.edad,numero: req.user.numero,foto: req.user.foto, carrito:  carritofinal })}
     }
     else{
+        const carritofinal= JSON.stringify (resultado.productos)
         if (products.length==0){
-            res.render('index', { listadoProd: products, listExists: false, email: req.user.username, direccion: req.user.direccion,nombre: req.user.nombre,edad: req.user.edad,numero: req.user.numero,foto: req.user.foto} )
-        } else {res.render('index', { listadoProd: products, listExists: true, email: req.user.username, direccion: req.user.direccion,nombre: req.user.nombre,edad: req.user.edad,numero: req.user.numero,foto: req.user.foto })}
-    }
-    
+            res.render('index', { listadoProd: products, listExists: false, email: req.user.username, direccion: req.user.direccion,nombre: req.user.nombre,edad: req.user.edad,numero: req.user.numero,foto: req.user.foto,  carrito: carritofinal} )
+        } else {res.render('index', { listadoProd: products, listExists: true, email: req.user.username, direccion: req.user.direccion,nombre: req.user.nombre,edad: req.user.edad,numero: req.user.numero,foto: req.user.foto, carrito: carritofinal })}
+    }  
  } )
 
 export { routerCarrito, routerProductos, routerHome} 

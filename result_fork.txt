@@ -1,0 +1,51 @@
+Started phase 0, duration: 1s @ 02:02:12(-0300) 2022-01-02
+Report @ 02:02:22(-0300) 2022-01-02
+Elapsed time: 10 seconds
+  Scenarios launched:  50
+  Scenarios completed: 0
+  Requests completed:  2926
+  Mean response/sec: 301.1
+  Response time (msec):
+    min: 6
+    max: 422
+    median: 137.5
+    p95: 340.2
+    p99: 391
+  Codes:
+    200: 1447
+    302: 1479
+
+Report @ 02:02:25(-0300) 2022-01-02
+Elapsed time: 12 seconds
+  Scenarios launched:  0
+  Scenarios completed: 50
+  Requests completed:  1074
+  Mean response/sec: 429.44
+  Response time (msec):
+    min: 7
+    max: 262
+    median: 79
+    p95: 187.8
+    p99: 236
+  Codes:
+    200: 553
+    302: 521
+
+All virtual users finished
+Summary report @ 02:02:25(-0300) 2022-01-02
+  Scenarios launched:  50
+  Scenarios completed: 50
+  Requests completed:  4000
+  Mean response/sec: 323.1
+  Response time (msec):
+    min: 6
+    max: 422
+    median: 115
+    p95: 319.5
+    p99: 384.5
+  Scenario counts:
+    0: 50 (100%)
+  Codes:
+    200: 2000
+    302: 2000
+
