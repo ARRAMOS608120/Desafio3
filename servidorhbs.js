@@ -32,7 +32,7 @@ app.engine('hbs', exphbs({
   partialsDir: __dirname + "/views/partials"
 }))
 app.use(session({
-  store: MongoStore.create({ mongoUrl:'mongodb+srv://ariel:Coder2021@cluster0.wjzen.mongodb.net/ecommerce?retryWrites=true&w=majority',
+  store: MongoStore.create({ mongoUrl:'',
   mongoOptions: advancedOptions, ttl: 100
   }),
   secret: 'secreto',
@@ -67,7 +67,7 @@ function createSendMailEthereal() {
     port: 587,
     auth: {
       user: "hailie.murphy14@ethereal.email",
-      pass: "fntUjMdzTmHM5RuQdh"
+      pass: ""
     }
   })
 }
@@ -80,8 +80,8 @@ const asunto = 'Nuevo registro'
 /* ------------------ Whatsapp -------------------- */
 import twilio from 'twilio'
 
-const accountSid = 'AC5dce4c7fb0529562951bd15dd73eef95';
-const authToken = '813d4243f1e13b786612082d3b2cc53d';
+const accountSid = '';
+const authToken = '';
 
 const client = twilio(accountSid, authToken)
 
@@ -123,7 +123,7 @@ CRUD();
 
 async function CRUD(){
     try{
-        await mongoose.connect ('mongodb+srv://ariel:Coder2021@cluster0.wjzen.mongodb.net/ecommerce?retryWrites=true&w=majority',{
+        await mongoose.connect ('',{
             useNewUrlParser: true,
             useUnifiedTopology: true,
         })
